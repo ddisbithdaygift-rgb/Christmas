@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merry Christmas - Janis.av</title>
+    <style>
+        :root {
+            --primary-red: #dc2626;
+            --primary-green: #16a34a;
+            --gold: #fbbf24;
+            --cream: #fef3c7;
+            --white: #ffffff;
+            --dark: #1f2937;
+            --focus-ring: 0 0 0 3px rgba(220, 38, 38, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            color: var(--dark);
+            overflow-x: hidden;
+            transition: background-color 0.3s ease;
+        }
+
+        /* ========== SNOWFALL ANIMATION ========== */
+        .snowfall {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: var(--white);
+            font-size: 1.5em;
+            opacity: 0.8;
+            animation: fall ease-in-out infinite;
+            will-change: transform;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.9));
+        }
+
+        @keyframes fall {
+            0% {
+                opacity: 1;
+                transform: translateY(-10px) translateX(0) rotateZ(0deg);
+            }
+            25% {
+                transform: translateY(25vh) translateX(25px) rotateZ(90deg);
+            }
+            50% {
+                opacity: 0.85;
+                transform: translateY(50vh) translateX(-15px) rotateZ(180deg);
+            }
+            75% {
+                transform: translateY(75vh) translateX(20px) rotateZ(270deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) translateX(0) rotateZ(360deg);
+            }
+        }
+
+        /* ========== PAGE CONTAINER ========== */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 20px;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        .page.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========== LANDING PAGE ========== */
+        .page1 {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #1f2937 0%, #7c2d12 50%, #111827 100%);
+            position: relative;
+        }
+
+        .festive-lights {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.1;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--primary-red),
+                var(--primary-green),
+                var(--gold)
+            );
+        }
+
+        .landing-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        .landing-emoji {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            animation: bounce 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-25px) scale(1.05);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 25px rgba(255, 193, 7, 0.8), 0 0 35px rgba(220, 38, 38, 0.6);
+            }
+        }
+
+        .landing-title {
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            font-weight: 700;
+            color: var(--cream);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            letter-spacing: -1px;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        .landing-text {
+            font-size: 1.1rem;
+            color: var(--cream);
+            margin-bottom: 40px;
+            line-height: 1.8;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ========== BUTTONS ========== */
+        .btn {
+            padding: 14px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .btn:focus-visible {
+            outline: none;
+            box-shadow: var(--focus-ring);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-red) 0%, #991b1b 100%);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #b91c1c 0%, #7f1d1d 100%);
+        }
+
+        .btn-secondary {
+            background: var(--primary-green);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(22, 163, 74, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #15803d;
+        }
+
+        /* ========== MODAL ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, var(--cream) 0%, #fde047 50%, var(--cream) 100%);
+            border-radius: 20px;
+            padding: 50px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border: 3px solid var(--gold);
+            animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        @keyframes slideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(60px) scale(0.9) rotateX(20deg);
+            }
+            60% {
+                opacity: 1;
+                transform: translateY(-5px) scale(1.02);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1) rotateX(0deg);
+            }
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--primary-red);
+            padding-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            font-size: 2rem;
+            color: var(--primary-red);
+            margin-bottom: 10px;
+        }
+
+        .modal-body {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--dark);
+            margin-bottom: 30px;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .modal-footer {
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary-green);
+            margin-top: 20px;
+        }
+
+        /* ========== QUIZ PAGE ========== */
+        .page2 {
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background: linear-gradient(135deg, #1f2937 0%, #165e4d 50%, #111827 100%);
+        }
+
+        .quiz-container {
+            max-width: 700px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .quiz-header h1 {
+            font-size: clamp(2rem, 8vw, 3rem);
+            color: var(--cream);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .quiz-header p {
+            color: var(--gold);
+            font-size: 1rem;
+        }
+
+        .question-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border-left: 5px solid var(--primary-red);
+        }
+
+        .question-number {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary-red);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 14px 16px;
+            background: #f3f4f6;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .option:hover {
+            background: #e5e7eb;
+            border-color: var(--primary-green);
+        }
+
+        .option input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            cursor: pointer;
+            accent-color: var(--primary-green);
+        }
+
+        .option input[type="radio"]:focus-visible {
+            outline: var(--focus-ring);
+        }
+
+        .option.selected {
+            background: var(--primary-green);
+            color: var(--white);
+            border-color: var(--primary-green);
+        }
+
+        .option.correct {
+            background: #dcfce7;
+            border-color: var(--primary-green);
+            color: var(--dark);
+        }
+
+        .option.incorrect {
+            background: #fee2e2;
+            border-color: var(--primary-red);
+            color: var(--dark);
+        }
+
+        .hidden-question {
+            display: none;
+        }
+
+        /* ========== RESULTS PAGE ========== */
+        .results-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 50px;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .results-emoji {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+
+        .results-score {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .results-message {
+            font-size: 1.2rem;
+            color: var(--dark);
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .results-footer {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-red);
+            border-top: 2px solid var(--gold);
+            padding-top: 20px;
+        }
+
+        /* ========== AUDIO TOGGLE ========== */
+        .audio-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 999;
+            background: linear-gradient(135deg, var(--primary-red) 0%, #991b1b 100%);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: var(--white);
+            padding: 14px 18px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 700;
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.5);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            will-change: transform;
+        }
+
+        .audio-toggle:hover {
+            transform: translateY(-5px) scale(1.1) rotate(10deg);
+            box-shadow: 0 12px 40px rgba(220, 38, 38, 0.7);
+        }
+
+        .audio-toggle:active {
+            transform: scale(0.95);
+        }
+
+        .audio-toggle:focus-visible {
+            outline: none;
+            box-shadow: var(--focus-ring);
+        }
+
+        .audio-toggle.playing {
+            animation: musicPulse 0.6s ease-in-out infinite;
+        }
+
+        @keyframes musicPulse {
+            0%, 100% { box-shadow: 0 8px 25px rgba(220, 38, 38, 0.5); }
+            50% { box-shadow: 0 8px 40px rgba(255, 193, 7, 0.8); }
+        }
+
+        /* ========== RESPONSIVE DESIGN ========== */
+        @media (max-width: 768px) {
+            .landing-title {
+                font-size: 2rem;
+            }
+
+            .landing-text {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 12px 32px;
+                font-size: 1rem;
+            }
+
+            .modal-content {
+                padding: 35px;
+            }
+
+            .question-container {
+                padding: 20px;
+            }
+
+            .results-container {
+                padding: 35px;
+            }
+
+            .results-score {
+                font-size: 2.8rem;
+            }
+
+            .audio-toggle {
+                padding: 10px 14px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .landing-emoji {
+                font-size: 3.5rem;
+            }
+
+            .landing-title {
+                font-size: 1.5rem;
+            }
+
+            .landing-text {
+                font-size: 0.95rem;
+            }
+
+            .modal-content {
+                padding: 25px;
+                border-radius: 15px;
+            }
+
+            .modal-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .modal-body {
+                font-size: 0.95rem;
+            }
+
+            .quiz-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .question-text {
+                font-size: 1rem;
+            }
+
+            .results-score {
+                font-size: 2.2rem;
+            }
+
+            .results-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Snowfall Animation -->
+    <div class="snowfall" id="snowfall"></div>
+
+    <!-- Audio Toggle -->
+    <button class="audio-toggle" id="audioToggle">🎵</button>
+    <audio id="bgMusic" loop preload="auto" crossorigin="anonymous">
+        <source src="https://www.chosic.com/wp-content/uploads/2020/12/Jingle-Bells-Ukulele-Musicphrase.mp3" type="audio/mpeg">
+    </audio>
+    <style id="musicVisualizer">
+        .audio-toggle::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.3); opacity: 0.1; }
+        }
+    </style>
+
+    <!-- Page 1: Landing Page -->
+    <div class="page page1 active" id="page1">
+        <div class="festive-lights"></div>
+        <div class="landing-content">
+            <div class="landing-emoji">🎄</div>
+            <h1 class="landing-title">Merry Christmas, My Friends!</h1>
+            <p class="landing-text">
+                This Christmas, let us celebrate the joy, love, and togetherness that brings us closer. 
+                Share in the spirit of the season and create memories that will last a lifetime. 
+                🎅✨
+            </p>
+            <button class="btn btn-primary" id="celebrateBtn">Celebrate 🎉</button>
+        </div>
+    </div>
+
+    <!-- Christmas Letter Modal -->
+    <div class="modal" id="letterModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>A Christmas Letter ❤️</h2>
+            </div>
+            <div class="modal-body">
+                Dear Friend,<br><br>
+                This Christmas, I, <strong>Janis.av</strong>, want to share something special with you. As I reflect on this beautiful season, my heart fills with gratitude for incredible people like you who make every moment meaningful.<br><br>
+                May your days be filled with warmth, laughter, and the magic that only Christmas brings. Thank you for being part of my journey and for the joy you bring into my life.<br><br>
+                Wishing you boundless happiness and peace.
+            </div>
+            <div class="modal-footer">
+                With love and warm wishes,<br>
+                <strong>Janis.av</strong> 🎄✨
+            </div>
+            <button class="btn btn-secondary" id="continueBtn" style="width: 100%; margin-top: 20px;">Continue →</button>
+        </div>
+    </div>
+
+    <!-- Page 2: Quiz Page -->
+    <div class="page page2" id="page2">
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <h1>Christmas Fun Quiz 🎄</h1>
+                <p>Test your Christmas knowledge!</p>
+            </div>
+
+            <!-- Question 1 -->
+            <div class="question-container">
+                <div class="question-number">Question 1 of 5</div>
+                <div class="question-text">In which country did the tradition of decorating Christmas trees originate?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q1" value="0"> Germany
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="1"> France
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="2"> Norway
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="3"> Canada
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question-container">
+                <div class="question-number">Question 2 of 5</div>
+                <div class="question-text">What is the name of Santa's reindeer that has a glowing red nose?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q2" value="0"> Dasher
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="1"> Rudolph
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="2"> Blitzen
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="3"> Comet
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question-container">
+                <div class="question-number">Question 3 of 5</div>
+                <div class="question-text">On which date is Christmas Day celebrated?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q3" value="0"> December 24th
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="1"> December 25th
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="2"> December 26th
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="3"> January 1st
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question-container">
+                <div class="question-number">Question 4 of 5</div>
+                <div class="question-text">What do people traditionally hang on the wall or door during Christmas?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q4" value="0"> Garland
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4" value="1"> Mistletoe
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4" value="2"> Wreath
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4" value="3"> Tinsel
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question-container">
+                <div class="question-number">Question 5 of 5</div>
+                <div class="question-text">What is the traditional Christmas drink made with eggs, cream, and spices?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q5" value="0"> Hot Chocolate
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q5" value="1"> Mulled Wine
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q5" value="2"> Eggnog
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q5" value="3"> Ginger Ale
+                    </label>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button class="btn btn-primary" id="submitBtn" style="width: 100%; margin-top: 20px;">Submit Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        // ========== STATE MANAGEMENT ==========
+        const state = {
+            currentPage: 1,
+            score: 0,
+            musicPlaying: false,
+            answers: {
+                q1: null,
+                q2: null,
+                q3: null,
+                q4: null,
+                q5: null
+            },
+            correctAnswers: {
+                q1: 0, // Germany
+                q2: 1, // Rudolph
+                q3: 1, // December 25th
+                q4: 2, // Wreath
+                q5: 2  // Eggnog
+            }
+        };
+
+        // ========== DOM ELEMENTS ==========
+        const page1 = document.getElementById('page1');
+        const page2 = document.getElementById('page2');
+        const celebrateBtn = document.getElementById('celebrateBtn');
+        const continueBtn = document.getElementById('continueBtn');
+        const letterModal = document.getElementById('letterModal');
+        const submitBtn = document.getElementById('submitBtn');
+        const audioToggle = document.getElementById('audioToggle');
+        const snowfallContainer = document.getElementById('snowfall');
+
+        // ========== SNOWFALL EFFECT ==========
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.textContent = '❄';
+            snowflake.style.left = Math.random() * 100 + '%';
+            
+            // Smooth, varied falling speeds (8-20 seconds)
+            const duration = Math.random() * 12 + 8;
+            snowflake.style.animationDuration = duration + 's, ' + (Math.random() * 4 + 3) + 's';
+            snowflake.style.opacity = Math.random() * 0.6 + 0.2;
+            
+            // Add slight delay for staggered appearance
+            snowflake.style.animationDelay = Math.random() * 2 + 's';
+            
+            snowflakeContainer.appendChild(snowflake);
+
+            // Cleanup after animation completes
+            setTimeout(() => snowflake.remove(), (duration + 2) * 1000);
+        }
+
+        const snowflakeContainer = snowfallContainer;
+        // Smoother snowflake generation
+        setInterval(createSnowflake, 200);
+
+        // ========== PAGE NAVIGATION ==========
+        function goToPage(pageNum) {
+            state.currentPage = pageNum;
+            if (pageNum === 1) {
+                page1.classList.add('active');
+                page2.classList.remove('active');
+            } else {
+                page1.classList.remove('active');
+                page2.classList.add('active');
+            }
+        }
+
+        // ========== MODAL HANDLING ==========
+        celebrateBtn.addEventListener('click', () => {
+            letterModal.classList.add('active');
+        });
+
+        continueBtn.addEventListener('click', () => {
+            letterModal.classList.remove('active');
+            goToPage(2);
+        });
+
+        letterModal.addEventListener('click', (e) => {
+            if (e.target === letterModal) {
+                letterModal.classList.remove('active');
+            }
+        });
+
+        // ========== QUIZ FUNCTIONALITY ==========
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                const questionName = e.target.name;
+                const selectedValue = e.target.value;
+                state.answers[questionName] = parseInt(selectedValue);
+
+                // Visual feedback
+                document.querySelectorAll(`input[name="${questionName}"]`).forEach(input => {
+                    const option = input.closest('.option');
+                    if (input.checked) {
+                        option.classList.add('selected');
+                    } else {
+                        option.classList.remove('selected');
+                    }
+                });
+            });
+        });
+
+        submitBtn.addEventListener('click', () => {
+            // Calculate score
+            let correctCount = 0;
+            for (let i = 1; i <= 5; i++) {
+                const questionKey = `q${i}`;
+                if (state.answers[questionKey] === state.correctAnswers[questionKey]) {
+                    correctCount++;
+                }
+            }
+            state.score = correctCount;
+
+            // Show results
+            showResults();
+        });
+
+        function showResults() {
+            // Hide quiz container
+            document.querySelector('.quiz-container').style.display = 'none';
+
+            // Create and show results
+            const resultsDiv = document.createElement('div');
+            resultsDiv.classList.add('results-container');
+            resultsDiv.innerHTML = `
+                <div class="results-emoji">🎉</div>
+                <h2 class="results-title">Quiz Complete!</h2>
+                <div class="results-score">${state.score}/5</div>
+                <p class="results-message">
+                    ${state.score === 5 ? '🌟 Perfect score! You are a Christmas expert!' : 
+                      state.score >= 4 ? '🎄 Excellent! You know your Christmas traditions well!' :
+                      state.score >= 3 ? '🎅 Good job! Keep learning more Christmas fun facts!' :
+                      '✨ Thanks for playing! Learn more Christmas traditions!'}
+                </p>
+                <div class="results-footer">
+                    Thanks for celebrating Christmas with Janis.av!
+                </div>
+            `;
+            document.getElementById('page2').appendChild(resultsDiv);
+        }
+
+        // ========== AUDIO TOGGLE WITH SMOOTH PLAYBACK ==========
+        const bgMusic = document.getElementById('bgMusic');
+        bgMusic.volume = 0.35;
+        let musicAutoStarted = false;
+        
+        function fadeVolume(target, duration = 1500) {
+            return new Promise(resolve => {
+                const startVolume = bgMusic.volume;
+                const startTime = Date.now();
+                
+                const fadeInterval = setInterval(() => {
+                    const elapsed = Date.now() - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    bgMusic.volume = startVolume + (target - startVolume) * progress;
+                    
+                    if (progress === 1) {
+                        clearInterval(fadeInterval);
+                        resolve();
+                    }
+                }, 50);
+            });
+        }
+        
+        async function startMusicWithFadeIn() {
+            if (!musicAutoStarted) {
+                try {
+                    bgMusic.volume = 0;
+                    await bgMusic.play();
+                    musicAutoStarted = true;
+                    state.musicPlaying = true;
+                    audioToggle.classList.add('playing');
+                    audioToggle.textContent = '🎵';
+                    await fadeVolume(0.35, 1500);
+                } catch (err) {
+                    console.log('Autoplay prevented - click to start');
+                    state.musicPlaying = false;
+                    audioToggle.textContent = '🔇';
+                }
+            }
+        }
+        
+        document.addEventListener('click', () => {
+            if (!musicAutoStarted) {
+                startMusicWithFadeIn();
+            }
+        }, { once: true });
+        
+        setTimeout(startMusicWithFadeIn, 800);
+        
+        audioToggle.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            state.musicPlaying = !state.musicPlaying;
+            
+            if (state.musicPlaying) {
+                bgMusic.play();
+                audioToggle.classList.add('playing');
+                audioToggle.textContent = '🎵';
+                await fadeVolume(0.35, 800);
+            } else {
+                audioToggle.classList.remove('playing');
+                audioToggle.textContent = '🔇';
+                await fadeVolume(0, 500);
+                bgMusic.pause();
+            }
+        });
+
+        // ========== KEYBOARD ACCESSIBILITY ==========
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                letterModal.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
